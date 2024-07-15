@@ -47,7 +47,7 @@ const MoleculeViewer = dynamic(() => import("./components/MoleculeViewer"), {
 type FragranceData = {
   molecularFormula: string;
   molecularWeight: number;
-  category: string;
+  category: keyof typeof fragranceCategories;
   compoundType: string;
   source: string;
   pubchemId: number;
@@ -288,7 +288,7 @@ function FragranceAnalysisApp() {
               {sortedFragrances.map(([name, data]) => (
                 <TableRow key={name}>
                   <TableCell>{name}</TableCell>
-                  <TableCell>{fragranceCategories[data.category]}</TableCell>
+                  <TableCell>{fragranceCategories[data.category as keyof typeof fragranceCategories]}</TableCell>
                   <TableCell>{data.source}</TableCell>
                   <TableCell>{data.compoundType}</TableCell>
                   <TableCell>{data.molecularWeight.toFixed(2)}</TableCell>

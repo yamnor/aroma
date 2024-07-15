@@ -1,6 +1,6 @@
 // data/fragranceData.js
 
-export const fragranceCategories = {
+export const fragranceCategories: { [key: string]: string } = {
   'フローラル': '🌸',
   'シトラス': '🍋',
   'ウッディ': '🌳',
