@@ -44,16 +44,23 @@ const MoleculeViewer = dynamic(() => import("./components/MoleculeViewer"), {
   ssr: false,
 });
 
+type FragranceData = {
+  molecularFormula: string;
+  molecularWeight: number;
+  category: string;
+  compoundType: string;
+  source: string;
+  pubchemId: number;
+  smiles: string;
+  fragrance: string;
+};
+
 function FragranceAnalysisApp() {
-  const [sortBy, setSortBy] = useState("name");
-  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortBy, setSortBy] = useState<string>('name');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [isMobile, setIsMobile] = useState(false);
 
   const [selectedMolecule, setSelectedMolecule] = useState(null);
-
-  const handleMoleculeSelect = useCallback((name, pubchemId) => {
-    setSelectedMolecule({ name, pubchemId });
-  }, []);
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -62,11 +69,11 @@ function FragranceAnalysisApp() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const getPubChemLink = (pubchemId) => {
+  const getPubChemLink = (pubchemId: number) => {
     return `https://pubchem.ncbi.nlm.nih.gov/compound/${pubchemId}`;
   };
 
-  const handleSort = (column) => {
+  const handleSort = (column: string) => {
     if (sortBy === column) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
@@ -103,7 +110,7 @@ function FragranceAnalysisApp() {
     );
   }, [sortBy, sortOrder]);
 
-  const SortableTableHeader = ({ column, children }) => (
+  const SortableTableHeader = ({ column, children }: { column: string; children: React.ReactNode }) => (
     <TableHead className="cursor-pointer" onClick={() => handleSort(column)}>
       <div className="flex items-center">
         {children}
