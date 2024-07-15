@@ -135,7 +135,7 @@ function FragranceAnalysisApp() {
   );
 
   const HelpContent = () => (
-    <div className="space-y-6 overflow-y-auto max-h-[60vh] pr-2">
+    <div className="space-y-6 overflow-y-auto h-full pr-2">
       <div>
         <p className="mb-2">
           このアプリでは、様々な香料の情報を比較・分析できます。
@@ -190,7 +190,7 @@ function FragranceAnalysisApp() {
               <HelpCircle className="ml-2 h-4 w-4" />
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-3xl overflow-y-auto">
+          <DialogContent className="max-w-[95vw] sm:max-w-4xl w-full max-h-[90vh] h-[90vh]">
             <DialogHeader>
               <DialogTitle>ヘルプ</DialogTitle>
             </DialogHeader>
@@ -203,27 +203,23 @@ function FragranceAnalysisApp() {
         <Accordion type="single" collapsible className="w-full">
           {sortedFragrances.map(([name, data]) => (
             <AccordionItem key={name} value={name}>
-              <AccordionTrigger>{name}</AccordionTrigger>
+              <AccordionTrigger>{name} {fragranceCategories[data.category]}</AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-2">
                   <p>
-                    <strong>カテゴリー:</strong>{" "}
-                    {fragranceCategories[data.category]}
+                    <strong>含まれるもの：</strong> {data.source}
                   </p>
                   <p>
-                    <strong>含まれるもの:</strong> {data.source}
+                    <strong>化合物の種類：</strong> {data.compoundType}
                   </p>
                   <p>
-                    <strong>化合物の種類:</strong> {data.compoundType}
+                    <strong>分子量：</strong> {data.molecularWeight.toFixed(2)}
                   </p>
                   <p>
-                    <strong>分子量:</strong> {data.molecularWeight.toFixed(2)}
+                    <strong>SMILES：</strong> {data.smiles}
                   </p>
                   <p>
-                    <strong>SMILES:</strong> {data.smiles}
-                  </p>
-                  <p>
-                    <strong>PubChem ID:</strong>
+                    <strong>PubChem ID：</strong>
                     <a
                       href={getPubChemLink(data.pubchemId)}
                       target="_blank"
@@ -253,11 +249,11 @@ function FragranceAnalysisApp() {
                           <Box size={16} />
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="max-w-[90vw] w-full max-h-[90vh] flex flex-col p-0">
+                      <DialogContent className="max-w-[90vw] w-full max-h-[50vh] flex flex-col p-0">
                         <DialogHeader className="px-4 py-2 border-b">
-                          <DialogTitle>{name}の3D構造</DialogTitle>
+                          <DialogTitle>{name}</DialogTitle>
                         </DialogHeader>
-                        <div className="flex-grow overflow-hidden h-[90vh]">
+                        <div className="flex-grow overflow-hidden h-[50vh]">
                           <MoleculeViewer pubchemId={data.pubchemId} />
                         </div>
                       </DialogContent>
@@ -314,7 +310,7 @@ function FragranceAnalysisApp() {
                       </DialogTrigger>
                       <DialogContent>
                         <DialogHeader>
-                          <DialogTitle>{name}の詳細情報</DialogTitle>
+                          <DialogTitle>{name}について</DialogTitle>
                         </DialogHeader>
                         <p>{data.fragrance}</p>
                       </DialogContent>
@@ -327,11 +323,11 @@ function FragranceAnalysisApp() {
                           <Box size={16} />
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="max-w-4xl w-full max-h-[90vh] flex flex-col p-0">
+                      <DialogContent className="max-w-4xl w-full max-h-[80vh] flex flex-col p-0">
                         <DialogHeader className="px-4 py-2 border-b">
-                          <DialogTitle>{name}の3D構造</DialogTitle>
+                          <DialogTitle>{name}</DialogTitle>
                         </DialogHeader>
-                        <div className="flex-grow overflow-hidden h-[90vh]">
+                        <div className="flex-grow overflow-hidden h-[80vh]">
                           <MoleculeViewer pubchemId={data.pubchemId} />
                         </div>
                       </DialogContent>
@@ -360,7 +356,7 @@ function FragranceAnalysisApp() {
 
 export default function Home() {
   return (
-    <main className="container mx-auto py-8">
+    <main className="container mx-auto px-0 py-0 sm:py-6 max-w-7xl">
       <FragranceAnalysisApp />
     </main>
   );
