@@ -39,6 +39,7 @@ import {
   compoundTypes,
 } from "../data/fragranceData";
 import dynamic from "next/dynamic";
+import { Analytics } from "@vercel/analytics/react";
 
 const MoleculeViewer = dynamic(() => import("./components/MoleculeViewer"), {
   ssr: false,
@@ -56,8 +57,8 @@ type FragranceData = {
 };
 
 function FragranceAnalysisApp() {
-  const [sortBy, setSortBy] = useState<string>('name');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortBy, setSortBy] = useState<string>("name");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [isMobile, setIsMobile] = useState(false);
 
   const [selectedMolecule, setSelectedMolecule] = useState(null);
@@ -110,7 +111,13 @@ function FragranceAnalysisApp() {
     );
   }, [sortBy, sortOrder]);
 
-  const SortableTableHeader = ({ column, children }: { column: string; children: React.ReactNode }) => (
+  const SortableTableHeader = ({
+    column,
+    children,
+  }: {
+    column: string;
+    children: React.ReactNode;
+  }) => (
     <TableHead className="cursor-pointer" onClick={() => handleSort(column)}>
       <div className="flex items-center">
         {children}
@@ -288,7 +295,13 @@ function FragranceAnalysisApp() {
               {sortedFragrances.map(([name, data]) => (
                 <TableRow key={name}>
                   <TableCell>{name}</TableCell>
-                  <TableCell>{fragranceCategories[data.category as keyof typeof fragranceCategories]}</TableCell>
+                  <TableCell>
+                    {
+                      fragranceCategories[
+                      data.category as keyof typeof fragranceCategories
+                      ]
+                    }
+                  </TableCell>
                   <TableCell>{data.source}</TableCell>
                   <TableCell>{data.compoundType}</TableCell>
                   <TableCell>{data.molecularWeight.toFixed(2)}</TableCell>
