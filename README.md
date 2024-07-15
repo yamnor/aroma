@@ -1,3 +1,3 @@
 # 香りの分子
 
-https://yamnor.github.io/aroma/
+**Try it now:** https://yamnor.github.io/aroma/
