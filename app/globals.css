@@ -1,3 +1,7 @@
+canvas {
+  position: relative !important;
+}
+
 @tailwind base;
   @tailwind components;
   @tailwind utilities;
