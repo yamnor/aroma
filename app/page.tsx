@@ -1,4 +1,3 @@
-// app/page.tsx
 "use client";
 
 import React, { useState, useMemo, useCallback } from "react";
@@ -49,7 +48,7 @@ type FragranceData = {
   molecularFormula: string;
   molecularWeight: number;
   category: keyof typeof fragranceCategories;
-  compoundType: string;
+  compoundType: keyof typeof compoundTypes;
   source: string;
   pubchemId: number;
   smiles: string;
@@ -190,7 +189,7 @@ function FragranceAnalysisApp() {
               <HelpCircle className="ml-2 h-4 w-4" />
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-[95vw] sm:max-w-4xl w-full max-h-[90vh] h-[90vh]">
+          <DialogContent className="max-w-[95vw] sm:max-w-4xl w-full max-h-[80vh] h-[80vh]">
             <DialogHeader>
               <DialogTitle>ヘルプ</DialogTitle>
             </DialogHeader>
@@ -229,7 +228,7 @@ function FragranceAnalysisApp() {
                       {data.pubchemId}
                     </a>
                   </p>
-                  <div className="flex space-x-2">
+                  <div className="flex space-x-2 mt-2">
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button variant="outline" size="sm">
@@ -250,7 +249,7 @@ function FragranceAnalysisApp() {
                         </Button>
                       </DialogTrigger>
                       <DialogContent className="max-w-[90vw] w-full max-h-[50vh] flex flex-col p-0">
-                        <DialogHeader className="px-4 py-2 border-b">
+                        <DialogHeader className="px-4 py-2">
                           <DialogTitle>{name}</DialogTitle>
                         </DialogHeader>
                         <div className="flex-grow overflow-hidden h-[50vh]">
@@ -323,11 +322,11 @@ function FragranceAnalysisApp() {
                           <Box size={16} />
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="max-w-4xl w-full max-h-[80vh] flex flex-col p-0">
-                        <DialogHeader className="px-4 py-2 border-b">
+                      <DialogContent className="max-w-[95vw] w-full max-h-[80vh] flex flex-col p-0">
+                        <DialogHeader className="px-4 py-2">
                           <DialogTitle>{name}</DialogTitle>
                         </DialogHeader>
-                        <div className="flex-grow overflow-hidden h-[80vh]">
+                        <div className="flex-grow overflow-hidden h-[calc(80vh-4rem)]">
                           <MoleculeViewer pubchemId={data.pubchemId} />
                         </div>
                       </DialogContent>
